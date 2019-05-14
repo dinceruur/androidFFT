@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/collectData"
+        android:icon="@drawable/ic_pulse"
+        android:title="Collect"/>
+
+    <item
+        android:id="@+id/config"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="Config"/>
+
+    <item
+        android:id="@+id/showResults"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="Idle"/>
+</menu>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FFT</string>
+    <string-array name="sensors">
+        <item>Linear</item>
+        <item>Normal</item>
+    </string-array>
+</resources>

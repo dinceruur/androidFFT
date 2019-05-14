@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primaryColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:visibility="visible"
+        android:id="@+id/initContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@color/primaryColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/playButton"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:tint="@color/secondaryColor"
+        android:src="@drawable/ic_play_arrow_black_24dp" />
+    </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/graphContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/graphView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="110dp"
+                app:layout_constraintBottom_toTopOf="@+id/fft"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Switch
+                android:id="@+id/switch3"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:checked="true"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:text="Z - Axis"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/graphView"
+                app:layout_constraintTop_toBottomOf="@+id/switch2" />
+
+            <Switch
+                android:id="@+id/switch2"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="8dp"
+                android:checked="true"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:text="Y - Axis"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/graphView"
+                app:layout_constraintTop_toBottomOf="@+id/switch1" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:checked="true"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:text="X - Axis"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/graphView"
+                app:layout_constraintTop_toTopOf="@+id/graphView" />
+
+            <Button
+                android:id="@+id/export"
+                android:visibility="gone"
+                android:background="@drawable/ic_button_background"
+                android:textColor="@color/secondaryColor"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="60dp"
+                android:text="Export"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/fft"
+                android:visibility="gone"
+                android:background="@drawable/ic_button_background"
+                android:textColor="@color/secondaryColor"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="60dp"
+                android:text="FFT"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
+
