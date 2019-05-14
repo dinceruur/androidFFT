@@ -115,6 +115,9 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
             @Override
             public void onClick(View v) {
                 graph.setTitle("FFT");
+                switchX.setChecked(true);
+                switchY.setChecked(true);
+                switchZ.setChecked(true);
                 doFFT = new DoFFT(collectData);
                 doFFT.init();
             }
@@ -164,6 +167,8 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
         mSeries3.setTitle("z");
 
         graph.setTranslationY(10);
+        graph.getGridLabelRenderer().setLabelVerticalWidth(30);
+        graph.getGridLabelRenderer().setTextSize(24);
         graph.setTitleColor(ContextCompat.getColor(view.getContext(), R.color.secondaryColor));
         graph.setTitle("Real Time Acceleration Data");
         graph.getGridLabelRenderer().setPadding(20);
@@ -326,7 +331,7 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
             }else{
                 mSensorManager.unregisterListener(fastestListener);
 
-                graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
+                graph.getGridLabelRenderer().setVerticalLabelsVisible(true);
 
                 doFFTButton.setVisibility(View.VISIBLE);
                 exportButton.setVisibility(View.VISIBLE);
