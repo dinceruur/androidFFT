@@ -4,6 +4,7 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+import android.util.Log;
 
 import com.github.dinceruur.androidfft.Config.Config;
 import com.github.dinceruur.androidfft.InterFace.InterFaceDataListener;
@@ -26,7 +27,6 @@ public class AccelerometerListener implements SensorEventListener{
 
     public void init(){
         isActive = true;
-        Config config = new Config( );
     }
 
     public int getSensorType() {
@@ -56,6 +56,7 @@ public class AccelerometerListener implements SensorEventListener{
                     break;
             }
             interFaceDataListener.notifySensorChanged();
+
         }
     }
 }

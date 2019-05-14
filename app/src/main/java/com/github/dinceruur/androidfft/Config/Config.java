@@ -2,7 +2,6 @@ package com.github.dinceruur.androidfft.Config;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.github.dinceruur.androidfft.R;
 
 public class Config{
 
@@ -20,15 +19,6 @@ public class Config{
     public int getSampleSize() {
         int SAMPLE_SIZE_DEFAULT = 3074;
         return pref.getInt("SAMPLE_SIZE", SAMPLE_SIZE_DEFAULT);
-    }
-
-    public void setAccType(int accType) {
-        putInt("ACC_TYPE",accType);
-    }
-
-    public int getAccType() {
-        int ACC_TYPE_DEFAULT = R.id.acc_normal;
-        return pref.getInt("ACC_TYPE", ACC_TYPE_DEFAULT);
     }
 
     public int getSampleSizeSplashScreen(){

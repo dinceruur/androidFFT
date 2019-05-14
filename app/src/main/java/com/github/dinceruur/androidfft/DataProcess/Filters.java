@@ -2,22 +2,14 @@ package com.github.dinceruur.androidfft.DataProcess;
 
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 
-
-class Filters {
-
-    private double[][] data;
-
-    Filters(double[][] data) {
-        this.data = data;
-    }
+public class Filters {
 
     /**
      * DC Component filtering
      * This methods removes the mean value of the sensor data from each element of the array.
      * @return     : filtered data
      */
-
-    double[][] dcComponent(){
+    double[][] dcComponent(double[][] data){
         double[][] output = new double[data.length][data[0].length];
 
         // +++ DC Component Removing +++

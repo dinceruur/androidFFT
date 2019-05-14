@@ -15,6 +15,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.BottomNavigationView
+        android:backgroundTint="@color/primaryDarkColor"
         android:id="@+id/navigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

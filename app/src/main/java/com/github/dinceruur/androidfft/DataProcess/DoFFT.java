@@ -8,6 +8,7 @@ public class DoFFT {
 
     private CollectData             collectData;
     private MathOperators           mathOperators;
+    private Filters                 filters;
     private static double[][]       accelerationRaw;
     private static long[]           timeStamps;
     private static int              sampleSize;
@@ -25,6 +26,7 @@ public class DoFFT {
 
     public void init(){
         mathOperators       = new MathOperators();
+        filters             = new Filters();
         accelerationRaw     = collectData.prepareFFTData;
         timeStamps          = collectData.timeStamp;
         sampleSize          = accelerationRaw[0].length;
@@ -48,12 +50,9 @@ public class DoFFT {
 
     private void displayData() {
 
-        double xAxis[]      = new double[sampleSize/2 + 1];
-
+        double xAxis[]          = new double[sampleSize/2 + 1];
+        double[][] filteredDate = filters.dcComponent(accelerationRaw);
         double[][] returnedData = new double[3][(sampleSize/2) + 1];
-
-        Filters filters = new Filters(accelerationRaw);
-        double[][] filteredDate = filters.dcComponent();
 
         for (int rowIndex = 0 ; rowIndex < 3; rowIndex++){
             returnedData[rowIndex] = mathOperators.squareRootOfComplex(dofftr(filteredDate[rowIndex]));

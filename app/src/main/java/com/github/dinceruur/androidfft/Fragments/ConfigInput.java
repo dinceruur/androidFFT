@@ -35,11 +35,7 @@ public class ConfigInput extends Fragment {
         final Config config                 = new Config(view.getContext());
         final EditText  getSampleSize       = view.findViewById(R.id.sampleSize);
         final Button    getSaveButton       = view.findViewById(R.id.saveButton);
-        final RadioGroup radioGroup       = view.findViewById(R.id.radioGroup);
 
-        // if is there any saved config about acc type, get and put it
-        int savedAccType = config.getAccType();
-        radioGroup.check(savedAccType);
 
         // if is there any saved config about sample size, get and put it
         int savedSampleSize = config.getSampleSize();
@@ -49,7 +45,6 @@ public class ConfigInput extends Fragment {
             @Override
             public void onClick(View v) {
                 config.setSampleSize(Integer.parseInt(getSampleSize.getText().toString()));
-                config.setAccType(radioGroup.getCheckedRadioButtonId());
             }
         });
 

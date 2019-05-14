@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,6 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
     public LineGraphSeries<DataPoint>   mSeries1;
     public LineGraphSeries<DataPoint>   mSeries2;
     public LineGraphSeries<DataPoint>   mSeries3;
-
 
     public double[][] prepareFFTData;
     public double[][] angleData;
@@ -114,6 +114,7 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
         doFFTButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                graph.setTitle("FFT");
                 doFFT = new DoFFT(collectData);
                 doFFT.init();
             }
@@ -162,16 +163,19 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
         mSeries2.setTitle("y");
         mSeries3.setTitle("z");
 
+        graph.setTranslationY(10);
+        graph.setTitleColor(ContextCompat.getColor(view.getContext(), R.color.secondaryColor));
+        graph.setTitle("Real Time Acceleration Data");
         graph.getGridLabelRenderer().setPadding(20);
         graph.getGridLabelRenderer().setHighlightZeroLines(true);
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
-        graph.getGridLabelRenderer().setGridColor(getResources().getColor(R.color.secondaryDarkColor));
-        graph.getGridLabelRenderer().setHorizontalLabelsColor(getResources().getColor(R.color.primaryTextColor));
-        graph.getGridLabelRenderer().setVerticalLabelsColor(getResources().getColor(R.color.primaryTextColor));
+        graph.getGridLabelRenderer().setGridColor(ContextCompat.getColor(view.getContext(), R.color.secondaryDarkColor));
+        graph.getGridLabelRenderer().setHorizontalLabelsColor(ContextCompat.getColor(view.getContext(), R.color.primaryTextColor));
+        graph.getGridLabelRenderer().setVerticalLabelsColor(ContextCompat.getColor(view.getContext(), R.color.primaryTextColor));
 
-        mSeries1.setColor(R.color.lineColor1);
-        mSeries2.setColor(R.color.lineColor2);
-        mSeries3.setColor(R.color.lineColor3);
+        mSeries1.setColor(ContextCompat.getColor(view.getContext(), R.color.lineColor1));
+        mSeries2.setColor(ContextCompat.getColor(view.getContext(), R.color.lineColor2));
+        mSeries3.setColor(ContextCompat.getColor(view.getContext(), R.color.lineColor3));
 
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(3);
@@ -182,9 +186,9 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
         graph.addSeries(mSeries2);
         graph.addSeries(mSeries3);
 
-        switchX.setTextColor(getResources().getColor(R.color.lineColor1));
-        switchY.setTextColor(getResources().getColor(R.color.lineColor2));
-        switchZ.setTextColor(getResources().getColor(R.color.lineColor3));
+        switchX.setTextColor(ContextCompat.getColor(view.getContext(), R.color.lineColor1));
+        switchY.setTextColor(ContextCompat.getColor(view.getContext(), R.color.lineColor2));
+        switchZ.setTextColor(ContextCompat.getColor(view.getContext(), R.color.lineColor3));
 
         switchX.setOnCheckedChangeListener(this);
         switchY.setOnCheckedChangeListener(this);
@@ -192,7 +196,7 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
 
         fastestListener = new AccelerometerListener(this);
 
-        mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager = (SensorManager) view.getContext().getSystemService(Context.SENSOR_SERVICE);
 
         mSensorManager.registerListener(fastestListener,
                 mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
@@ -207,9 +211,14 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+
+
         switch (buttonView.getId()) {
 
             case R.id.switch1:
+
+
 
                 if(isChecked){
                     if(graph.getSeries().size() == 0){
@@ -226,6 +235,7 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
                 }else{
                     graph.removeSeries(mSeries1);
                 }
+
 
                 break;
 
@@ -278,11 +288,7 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
         boolean isExist = false;
 
         for (Series singleSeries: checkMe){
-            if(singleSeries.getTitle().equals(needle)){
-                isExist = true;
-            }else{
-                isExist = false;
-            }
+            isExist = singleSeries.getTitle().equals(needle);
         }
         return isExist;
     }
@@ -319,6 +325,9 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
 
             }else{
                 mSensorManager.unregisterListener(fastestListener);
+
+                graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
+
                 doFFTButton.setVisibility(View.VISIBLE);
                 exportButton.setVisibility(View.VISIBLE);
             }
@@ -341,7 +350,6 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(graphData[0][graphData[0].length-1].getX());
-
 
         graph.getViewport().setScrollable(false); // enables horizontal scrolling
         graph.getViewport().setScrollableY(false); // enables vertical scrolling

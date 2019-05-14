@@ -9,9 +9,4 @@
         android:id="@+id/config"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="Config"/>
-
-    <item
-        android:id="@+id/showResults"
-        android:icon="@drawable/ic_info_black_24dp"
-        android:title="Idle"/>
 </menu>
