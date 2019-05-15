@@ -1,12 +1,9 @@
 package com.github.dinceruur.androidfft;
 
-import android.content.Context;
+
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.util.Log;
-
-import com.github.dinceruur.androidfft.Config.Config;
 import com.github.dinceruur.androidfft.InterFace.InterFaceDataListener;
 
 public class AccelerometerListener implements SensorEventListener{
