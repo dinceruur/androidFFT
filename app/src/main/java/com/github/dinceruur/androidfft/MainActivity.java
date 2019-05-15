@@ -1,25 +1,31 @@
 package com.github.dinceruur.androidfft;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import com.github.dinceruur.androidfft.Fragments.CollectData;
 import com.github.dinceruur.androidfft.Fragments.ConfigInput;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onDestroy() {
+        deleteFiles(getFilesDir());
+        super.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
 
@@ -60,4 +66,16 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    void deleteFiles(File file) {
+        if( file.exists() ) {
+            if (file.isDirectory()) {
+                File[] files = file.listFiles();
+                for (File singleFile : files) {
+                    if (!singleFile.isDirectory()) {
+                        singleFile.delete();
+                    }
+                }
+            }
+        }
+    }
 }
