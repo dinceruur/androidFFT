@@ -57,7 +57,6 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
     public LineGraphSeries<DataPoint>   mSeries3;
 
     public double[][] prepareFFTData;
-    public double[][] angleData;
     public long[]     timeStamp;
     int sampleSize;
     int graph2LastXValue    = 0;
@@ -97,7 +96,6 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
 
         sampleSize      = config.getSampleSize();
         prepareFFTData  = new double[3][sampleSize];
-        angleData       = new double[3][sampleSize];
         timeStamp       = new long[sampleSize];
 
         DisplayMetrics displayMetrics = view.getResources().getDisplayMetrics();
@@ -128,7 +126,6 @@ public class CollectData extends Fragment implements CompoundButton.OnCheckedCha
             public void onClick(View v) {
                 FileStream fileStream = new FileStream();
                 fileStream.saveData(getActivity(), prepareFFTData,"rawAcc");
-                fileStream.saveData(getActivity(), angleData,"rawAngle");
             }
         });
 

@@ -1,9 +1,21 @@
 package com.github.dinceruur.androidfft.Helper;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
+
+import com.github.dinceruur.androidfft.BuildConfig;
+
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -42,27 +54,33 @@ public class FileStream {
             }
 
             outputStream.close();
-            this.sendData();
+            this.share();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void sendData(){
-        String charset = "UTF-8";
-        String requestURL = "http://35.246.151.115:3001/upload";
+    private void share(){
         String file_path = context.getFilesDir() + "/" + this.filename;
 
-        try {
-            MultipartUtility multipart = new MultipartUtility(requestURL, charset);
-            multipart.addFormField("fileName", this.filename);
-            multipart.addFilePart("uploadFile", new File(file_path));
-            String response = multipart.finish();
+        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+        File fileWithinMyDir = new File(file_path);
 
-            Log.wtf("MultiPartResponse", response);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(fileWithinMyDir.exists()) {
+            intentShareFile.setType("text/csv");
+
+            Uri csvUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", fileWithinMyDir);
+
+            intentShareFile.putExtra(Intent.EXTRA_STREAM, csvUri);
+
+            intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                    "Sharing File...");
+            intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+
+            context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
         }
     }
 
