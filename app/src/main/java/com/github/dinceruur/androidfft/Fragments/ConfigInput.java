@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import com.github.dinceruur.androidfft.Config.Config;
 import com.github.dinceruur.androidfft.R;
 
@@ -34,6 +34,7 @@ public class ConfigInput extends Fragment {
 
         final Config config                 = new Config(view.getContext());
         final EditText  getSampleSize       = view.findViewById(R.id.sampleSize);
+        final CheckBox  getDCRemove         = view.findViewById(R.id.enableDCRemove);
         final Button    getSaveButton       = view.findViewById(R.id.saveButton);
 
 
@@ -41,10 +42,22 @@ public class ConfigInput extends Fragment {
         int savedSampleSize = config.getSampleSize();
         getSampleSize.setText(String.valueOf(savedSampleSize));
 
+        // if is there any saved config about DC REMOVING, get and put it
+        int savedDCRemoving = config.getDcRemoving();
+        if(savedDCRemoving == 1){
+            getDCRemove.setChecked(true);
+        }
+
         getSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 config.setSampleSize(Integer.parseInt(getSampleSize.getText().toString()));
+
+                int dcValue = 0;
+                if(getDCRemove.isChecked()){
+                    dcValue = 1;
+                }
+                config.setDcRemoving(dcValue);
             }
         });
 

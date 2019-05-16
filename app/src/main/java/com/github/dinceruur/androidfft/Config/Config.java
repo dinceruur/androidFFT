@@ -12,6 +12,15 @@ public class Config{
         pref = ctx.getApplicationContext().getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE);
     }
 
+    public void setDcRemoving(int dcRemoving) {
+        putInt("DC_REMOVING",dcRemoving);
+    }
+
+    public int getDcRemoving() {
+        int DC_REMOVING = 1;
+        return pref.getInt("DC_REMOVING", DC_REMOVING);
+    }
+
     public void setSampleSize(int sampleSize) {
         putInt("SAMPLE_SIZE",sampleSize);
     }

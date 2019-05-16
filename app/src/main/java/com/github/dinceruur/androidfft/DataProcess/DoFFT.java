@@ -1,5 +1,6 @@
 package com.github.dinceruur.androidfft.DataProcess;
 
+import com.github.dinceruur.androidfft.Config.Config;
 import com.jjoe64.graphview.series.DataPoint;
 import org.apache.commons.math3.complex.Complex;
 import com.github.dinceruur.androidfft.Fragments.CollectData;
@@ -50,12 +51,17 @@ public class DoFFT {
 
     private void displayData() {
 
+        Config config = new Config(collectData.getContext());
+
         double xAxis[]          = new double[sampleSize/2 + 1];
-        double[][] filteredDate = filters.dcComponent(accelerationRaw);
         double[][] returnedData = new double[3][(sampleSize/2) + 1];
 
+        if(config.getDcRemoving() == 1){
+            accelerationRaw = filters.dcComponent(accelerationRaw);
+        }
+
         for (int rowIndex = 0 ; rowIndex < 3; rowIndex++){
-            returnedData[rowIndex] = mathOperators.squareRootOfComplex(dofftr(filteredDate[rowIndex]));
+            returnedData[rowIndex] = mathOperators.squareRootOfComplex(dofftr(accelerationRaw[rowIndex]));
         }
 
         DataPoint[][] graphData = new DataPoint[returnedData.length][returnedData[0].length];
