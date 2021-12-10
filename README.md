@@ -3,8 +3,6 @@ This app reads sensor data until reaches the desired sample size, and than trans
 FFT part is implemented as native code : for more info take a look at <a href="https://github.com/berndporr/kiss-fft">this repo</a>. 
 <p>Graph library : https://github.com/jjoe64/GraphView</p>
 
-You can download the app on <a href="https://play.google.com/store/apps/details?id=com.github.dinceruur.androidfft">Google Play Store</a>
-
 # Important Notes
 <ul>
   <li>You can set sampling size on config screen like 512,1024, ... </li>
